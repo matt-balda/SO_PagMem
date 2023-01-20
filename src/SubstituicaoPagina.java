@@ -1,5 +1,6 @@
 package src;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class SubstituicaoPagina {
@@ -11,4 +12,15 @@ public class SubstituicaoPagina {
 
     // Estrutura para armazenar as páginas presentes na memória
     private Queue<Pagina> memoria;
+
+    // Construtor
+    public SubstituicaoPagina(int tamanhoMemoria) {
+        this.tamanhoMemoria = tamanhoMemoria;
+        memoria = new LinkedList<Pagina>();
+    }
+
+    // Método para ler o arquivo de trace e simular a alocação de memória
+    public void simular(String nomeArquivo, String algoritmo) {
+
+    }
 }
