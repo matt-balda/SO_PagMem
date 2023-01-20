@@ -1,6 +1,7 @@
 package src;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class SubstituicaoPagina {
 
     // Estrutura para armazenar as páginas presentes na memória
     private Queue<Pagina> memoria;
+    private int paginaFalhas = 0;
 
     // Construtor
     public SubstituicaoPagina(int tamanhoMemoria) {
@@ -23,7 +25,6 @@ public class SubstituicaoPagina {
 
     // Método para ler o arquivo de trace e simular a alocação de memória
     public void simular(String nomeArquivo, String algoritmo) {
-        int paginaFalhas = 0;
         try {
             Scanner entrada = new Scanner(new File(nomeArquivo));
             while (entrada.hasNextLine()) {
@@ -59,10 +60,32 @@ public class SubstituicaoPagina {
                         } else if (algoritmo.equals("VMS")){ // por página mais antiga, não referenciada
                             long acessoMaisAntigo = Long.MAX_VALUE;
                             Pagina paginaMaisAntiga = null;
+                            for (Pagina p : memoria) {
+                                if (p.getUltimoAcesso() < acessoMaisAntigo) {
+                                    acessoMaisAntigo = p.getUltimoAcesso();
+                                    paginaMaisAntiga = p;
+                                }
+                            }
+                            memoria.remove(paginaMaisAntiga);
+                            for (Pagina p : memoria) {
+                                if (p.isReferenciado()) {
+                                    p.setReferenciado(false);
+                                }
+                            }
                         }
+                        paginaFalhas++;
                     }
+                    // Adicionar a página à memória
+                    memoria.add(new Pagina(numeroPagina));
                 }
             }
+            entrada.close();
+        } catch (FileNotFoundException e) {
+            throw new ExceptionMessage("Arquivo de trace não encontrado.");
         }
+    }
+    // Método para retornar o número de falhas de página
+    public int getPaginaFalhas() {
+        return paginaFalhas;
     }
 }
