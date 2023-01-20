@@ -1,7 +1,9 @@
 package src;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class SubstituicaoPagina {
     // Tamanho da memória em frames
@@ -21,6 +23,15 @@ public class SubstituicaoPagina {
 
     // Método para ler o arquivo de trace e simular a alocação de memória
     public void simular(String nomeArquivo, String algoritmo) {
-
+        int paginaFalhas = 0;
+        try {
+            Scanner entrada = new Scanner(new File(nomeArquivo));
+            while (entrada.hasNextLine()) {
+                String[] linha = entrada.nextLine().split(" ");
+                long endereco = Long.parseLong(linha[2], 16);
+                int numeroPagina = (int) (endereco / TAMANHO_PAGINA);
+                boolean encontrado = false;
+            }
+        }
     }
 }
