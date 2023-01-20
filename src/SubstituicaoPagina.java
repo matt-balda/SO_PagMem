@@ -41,7 +41,27 @@ public class SubstituicaoPagina {
                         break;
                     }
                 }
-                
+                if (!encontrado) {
+                    // Aplicar a política de substituição escolhida
+                    if (memoria.size() == tamanhoMemoria) {
+                        if (algoritmo.equals("LRU")) {
+                            long acessoMaisAntigo = Long.MAX_VALUE;
+                            Pagina paginaMaisAntiga = null;
+                            for (Pagina p : memoria) {
+                                if (p.getUltimoAcesso() < acessoMaisAntigo) {
+                                    acessoMaisAntigo = p.getUltimoAcesso();
+                                    paginaMaisAntiga = p;
+                                }
+                            }
+                            memoria.remove(paginaMaisAntiga);
+                        }else if (algoritmo.equals("FIFO")) {
+                            memoria.remove();
+                        } else if (algoritmo.equals("VMS")){ // por página mais antiga, não referenciada
+                            long acessoMaisAntigo = Long.MAX_VALUE;
+                            Pagina paginaMaisAntiga = null;
+                        }
+                    }
+                }
             }
         }
     }
