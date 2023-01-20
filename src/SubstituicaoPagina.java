@@ -31,6 +31,17 @@ public class SubstituicaoPagina {
                 long endereco = Long.parseLong(linha[2], 16);
                 int numeroPagina = (int) (endereco / TAMANHO_PAGINA);
                 boolean encontrado = false;
+                // Verificar se a página já está na memória
+                for (Pagina p : memoria) {
+                    if (p.getNumeroPagina() == numeroPagina) {
+                        encontrado = true;
+                        if (algoritmo.equals("LRU")) {
+                            p.setUltimoAcesso(System.nanoTime());
+                        }
+                        break;
+                    }
+                }
+                
             }
         }
     }
