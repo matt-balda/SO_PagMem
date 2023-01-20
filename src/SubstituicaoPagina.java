@@ -29,7 +29,7 @@ public class SubstituicaoPagina {
             Scanner entrada = new Scanner(new File(nomeArquivo));
             while (entrada.hasNextLine()) {
                 String[] linha = entrada.nextLine().split(" ");
-                long endereco = Long.parseLong(linha[2], 16);
+                long endereco = Long.parseLong(linha[0], 16);
                 int numeroPagina = (int) (endereco / TAMANHO_PAGINA);
                 boolean encontrado = false;
                 // Verificar se a página já está na memória
