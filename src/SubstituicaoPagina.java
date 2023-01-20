@@ -1,5 +1,7 @@
 package src;
 
+import java.util.Queue;
+
 public class SubstituicaoPagina {
     // Tamanho da memória em frames
     private int tamanhoMemoria;
@@ -8,5 +10,5 @@ public class SubstituicaoPagina {
     private final int TAMANHO_PAGINA = 4096;
 
     // Estrutura para armazenar as páginas presentes na memória
-    private Queue<Page> memoria;
+    private Queue<Pagina> memoria;
 }
