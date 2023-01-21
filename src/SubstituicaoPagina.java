@@ -39,6 +39,9 @@ public class SubstituicaoPagina {
                         if (algoritmo.equals("LRU")) {
                             p.setUltimoAcesso(System.nanoTime());
                         }
+                        if (linha[1].equals("W")) {
+                            p.setDirty(true);
+                        }
                         break;
                     }
                 }
@@ -55,9 +58,9 @@ public class SubstituicaoPagina {
                                 }
                             }
                             memoria.remove(paginaMaisAntiga);
-                        }else if (algoritmo.equals("FIFO")) {
+                        } else if (algoritmo.equals("FIFO")) {
                             memoria.remove();
-                        } else if (algoritmo.equals("VMS")){ // por página mais antiga, não referenciada
+                        } else if (algoritmo.equals("VMS")) { // por página mais antiga, não referenciada
                             long acessoMaisAntigo = Long.MAX_VALUE;
                             Pagina paginaMaisAntiga = null;
                             for (Pagina p : memoria) {
@@ -77,13 +80,23 @@ public class SubstituicaoPagina {
                     }
                     // Adicionar a página à memória
                     memoria.add(new Pagina(numeroPagina));
+                    if (linha[1].equals("W")) {
+                        Pagina last = ((LinkedList<Pagina>)memoria).getLast();
+                        last.setDirty(true);
+                    }
                 }
             }
             entrada.close();
         } catch (FileNotFoundException e) {
             throw new ExceptionMessage("Arquivo de trace não encontrado.");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ExceptionMessage("Erro: formato de linha inválido no arquivo de trace.");
+        } catch (NumberFormatException e) {
+            throw new ExceptionMessage("Erro: endereço inválido no arquivo de trace.");
         }
+
     }
+
     // Método para retornar o número de falhas de página
     public int getPaginaFalhas() {
         return paginaFalhas;
