@@ -7,8 +7,11 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class SubstituicaoPagina {
-    // Tamanho da memória em frames
+    // Tamanho da memória em quadros
     private int tamanhoMemoria;
+
+    // Tamanho de cada quadro em bytes
+    private int tamanhoQuadro;
 
     // Tamanho de cada página em bytes
     private final int TAMANHO_PAGINA = 4096;
@@ -18,8 +21,9 @@ public class SubstituicaoPagina {
     private int paginaFalhas = 0;
 
     // Construtor
-    public SubstituicaoPagina(int tamanhoMemoria) {
+    public SubstituicaoPagina(int tamanhoMemoria, int tamanhoQuadro) {
         this.tamanhoMemoria = tamanhoMemoria;
+        this.tamanhoQuadro = tamanhoQuadro;
         memoria = new LinkedList<Pagina>();
     }
 
