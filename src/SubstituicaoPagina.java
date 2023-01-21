@@ -35,10 +35,11 @@ public class SubstituicaoPagina {
                 String[] linha = entrada.nextLine().split(" ");
                 long endereco = Long.parseLong(linha[0], 16);
                 int numeroPagina = (int) (endereco / TAMANHO_PAGINA);
+                int numeroQuadro = (int) (endereco / tamanhoQuadro);
                 boolean encontrado = false;
-                // Verificar se a página já está na memória
+                // Verificar se o quadro já está na memória
                 for (Pagina p : memoria) {
-                    if (p.getNumeroPagina() == numeroPagina) {
+                    if (p.getNumeroQuadro() == numeroQuadro && p.getNumeroPagina() == numeroPagina) {
                         encontrado = true;
                         if (algoritmo.equals("LRU")) {
                             p.setUltimoAcesso(System.nanoTime());
@@ -82,8 +83,8 @@ public class SubstituicaoPagina {
                         }
                         paginaFalhas++;
                     }
-                    // Adicionar a página à memória
-                    memoria.add(new Pagina(numeroPagina));
+                    // Adicionar o quadro à memória
+                    memoria.add(new Pagina(numeroQuadro, numeroPagina));
                     if (linha[1].equals("W")) {
                         Pagina last = ((LinkedList<Pagina>)memoria).getLast();
                         last.setDirty(true);

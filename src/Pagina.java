@@ -2,19 +2,22 @@ package src;
 
 public class Pagina {
     private int numeroPagina;
+    private int numeroQuadro;
     private long ultimoAcesso;
     private boolean referenciado;
     private boolean dirty;
 
     // Construtor
-    public Pagina(int numeroPagina) {
+    public Pagina(int numeroPagina, int numeroQuadro) {
         this.numeroPagina = numeroPagina;
+        this.numeroQuadro = numeroQuadro;
         this.ultimoAcesso = System.nanoTime();
-        this.referenciado = true;
         this.dirty = false;
+        this.referenciado = true;
     }
 
     // Métodos get e set
+
 
     public int getNumeroPagina() {
         return numeroPagina;
@@ -22,6 +25,14 @@ public class Pagina {
 
     public void setNumeroPagina(int numeroPagina) {
         this.numeroPagina = numeroPagina;
+    }
+
+    public int getNumeroQuadro() {
+        return numeroQuadro;
+    }
+
+    public void setNumeroQuadro(int numeroQuadro) {
+        this.numeroQuadro = numeroQuadro;
     }
 
     public long getUltimoAcesso() {

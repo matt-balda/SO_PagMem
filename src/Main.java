@@ -2,7 +2,7 @@ package src;
 
 public class Main {
     public static void main(String[] args) {
-        String[] traces = { "bzip.trace", "gcc.trace", "sixpack.trace", "swim.trace", "bigone.trace" };
+        String[] traces = {"bzip.trace", "gcc.trace", "sixpack.trace", "swim.trace", "bigone.trace"};
         int[] tamanhosQuadro = {4096, 8192, 16384, 32768};
 
         for (String trace : traces) {
@@ -20,4 +20,5 @@ public class Main {
                 System.out.println("Número de falhas de página com VMS e tamanho de quadro " + tamanhoQuadro + " no trace " + trace + ": " + pr.getPaginaFalhas());
             }
         }
+    }
 }
